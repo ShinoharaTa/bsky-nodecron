@@ -1,5 +1,5 @@
 import pkg from "@atproto/api";
-const { BskyAgent } = pkg;
+const { BskyAgent, RichText } = pkg;
 
 export default class BskyUtils {
   identifier = null;
@@ -26,19 +26,24 @@ export default class BskyUtils {
     return;
   };
 
-  post = async (message) => {
-    if (!this.self) return;
+  post = async (text, reply = null) => {
+    if (!this.self) return null;
     try {
-      await this.agent.api.app.bsky.feed.post.create(
-        { repo: this.self.did },
-        {
-          text: message,
-          createdAt: new Date().toISOString(),
-        }
-      );
+      const rt = new RichText({ text });
+      await rt.detectFacets(this.agent);
+      let params = {
+        $type: "app.bsky.feed.post",
+        text: rt.text,
+        facets: rt.facets,
+      };
+      if (reply) {
+        params.reply = { parent: reply, root: reply };
+      }
+      const response = await this.agent.post(params);
+      return response;
     } catch ($ex) {
       console.error($ex);
     }
-    return;
+    return null;
   };
 }
