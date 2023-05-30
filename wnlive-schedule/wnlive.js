@@ -2,18 +2,10 @@ import axios from "axios";
 import casters from "./casters.js";
 import BskyUtils from "../common/bsky.js";
 
-import dotenv from "dotenv";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 export default class wnlive {
   bsky = null;
-  constructor() {
-    dotenv.config({ path: `${__dirname}/.env` });
-    const { AUTHOR, PASSWORD } = process.env;
-    this.bsky = new BskyUtils("https://bsky.social", AUTHOR, PASSWORD);
+  constructor(author, pass) {
+    this.bsky = new BskyUtils("https://bsky.social", author, pass);
   }
 
   process = async () => {
