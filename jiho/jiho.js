@@ -8,7 +8,7 @@ export default class jiho {
   }
 
   process = async () => {
-    const waitTime = Math.floor(Math.random() * 3000); // 0~300000ミリ秒（5分）のランダムな値
+    const waitTime = Math.floor(Math.random() * 360000); // 0~300000ミリ秒（5分）のランダムな値
     setTimeout(async () => {
       console.log(waitTime)
       const time = moment().tz("Asia/Tokyo").format("YYYY/MM/DD HH:mm:ss");
