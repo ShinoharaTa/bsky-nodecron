@@ -13,7 +13,9 @@ export default class wnlive {
       "http://smtgvs.weathernews.jp/a/solive_timetable/timetable.json"
     );
     const timetables = response.data;
+    console.log(timetables);
     let message = "";
+    message += "■ これからのスケジュールをお知らせします。\n\n";
     for (let timetable of timetables) {
       let caster = "";
       if (timetable.caster !== "") {
@@ -25,16 +27,14 @@ export default class wnlive {
       } else {
         caster = "公式チャンネル";
       }
-      message += "■ " + timetable["hour"] + "～ （" + caster + "）\n";
-      message +=
-        "　" +
-        (timetable["title"].replace("ウェザーニュースLiVE", "") !== ""
-          ? timetable["title"].replace("ウェザーニュース", "")
-          : "放送待機") +
-        "\n\n";
+
+      if (timetable["title"].replace("ウェザーニュースLiVE", "") !== "") {
+        message += timetable["hour"] + "～ （" + caster + "）\n";
+      }
     }
     message = message.replace(/\n\n$/, "");
-    await this.bsky.login();
-    await this.bsky.post(message);
+    console.log(message);
+    // await this.bsky.login();
+    // await this.bsky.post(message);
   };
 }
