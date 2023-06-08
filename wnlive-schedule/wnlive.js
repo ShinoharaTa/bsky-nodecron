@@ -34,7 +34,7 @@ export default class wnlive {
     }
     message = message.replace(/\n\n$/, "");
     console.log(message);
-    // await this.bsky.login();
-    // await this.bsky.post(message);
+    await this.bsky.login();
+    await this.bsky.post(message);
   };
 }
