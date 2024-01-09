@@ -1,37 +1,35 @@
-import pkg from "@atproto/api";
-const { BskyAgent, RichText } = pkg;
+import { BskyAgent, RichText } from "@atproto/api";
+import { Record } from "@atproto/api/dist/client/types/app/bsky/feed/post";
+import { Main } from "@atproto/api/dist/client/types/com/atproto/repo/strongRef";
 
 export default class BskyUtils {
-  identifier = null;
-  password = null;
-  agent = null;
-  self = null;
-  constructor(service, identifier, password) {
+  identifier: string;
+  password: string;
+  agent: BskyAgent | null = null;
+  constructor(service: string | URL, identifier: string, password: string) {
     this.identifier = identifier;
     this.password = password;
     this.agent = new BskyAgent({ service: service });
   }
   login = async () => {
     try {
-      const { success, data } = await this.agent.login({
+      if (!this.agent) throw new Error("agent not initialized");
+      await this.agent.login({
         identifier: this.identifier,
         password: this.password,
       });
-      if (success) {
-        this.self = data;
-      }
     } catch ($ex) {
       console.error($ex);
     }
     return;
   };
 
-  post = async (text, reply = null) => {
-    if (!this.self) return null;
+  post = async (text: string, reply?: Main) => {
+    if (!this.agent) return null;
     try {
       const rt = new RichText({ text });
       await rt.detectFacets(this.agent);
-      let params = {
+      const params: Partial<Record> & Omit<Record, "createdAt"> = {
         $type: "app.bsky.feed.post",
         text: rt.text,
         facets: rt.facets,
