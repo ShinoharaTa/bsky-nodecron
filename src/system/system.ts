@@ -1,8 +1,8 @@
 import BskyUtils from "../common/bsky.js";
 
 export default class system {
-  bsky = null;
-  constructor(author, pass) {
+  bsky: BskyUtils;
+  constructor(author: string, pass: string) {
     this.bsky = new BskyUtils("https://bsky.social", author, pass);
   }
 
