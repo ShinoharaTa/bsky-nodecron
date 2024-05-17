@@ -1,6 +1,6 @@
 import { BskyAgent, RichText } from "@atproto/api";
-import { Record } from "@atproto/api/dist/client/types/app/bsky/feed/post";
-import { Main } from "@atproto/api/dist/client/types/com/atproto/repo/strongRef";
+import type { Record } from "@atproto/api/dist/client/types/app/bsky/feed/post";
+import type { Main } from "@atproto/api/dist/client/types/com/atproto/repo/strongRef";
 
 export default class BskyUtils {
   identifier: string;

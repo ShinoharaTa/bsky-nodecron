@@ -14,17 +14,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@atproto/api": "^0.3.8",
-    "@babel/core": "^7.23.7",
-    "@babel/preset-env": "^7.23.7",
-    "@babel/preset-typescript": "^7.23.3",
-    "@types/node": "^20.11.16",
+    "@atproto/api": "^0.12.10",
+    "@babel/core": "^7.24.5",
+    "@babel/preset-env": "^7.24.5",
+    "@babel/preset-typescript": "^7.24.1",
+    "@types/node": "^20.12.12",
     "@types/node-cron": "^3.0.11",
-    "axios": "^1.4.0",
-    "biome": "^0.3.3",
-    "dotenv": "^16.0.3",
-    "moment-timezone": "^0.5.43",
-    "node-cron": "^3.0.2",
-    "typescript": "^5.3.3"
+    "axios": "^1.6.8",
+    "biome": "^0.2.2",
+    "dotenv": "^16.4.5",
+    "moment-timezone": "^0.5.45",
+    "node-cron": "^3.0.3",
+    "typescript": "^5.4.5"
   }
 }
